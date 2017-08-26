@@ -1,16 +1,26 @@
 package net.germangamedevs.commands;
 
-import de.btobastian.sdcf4j.Command;
-import de.btobastian.sdcf4j.CommandExecutor;
+import com.jagrosh.jdautilities.commandclient.Command;
+import com.jagrosh.jdautilities.commandclient.CommandEvent;
+
+import java.time.temporal.ChronoUnit;
 
 /**
  * Created by Michael Lohr on 26-Aug-17.
  */
-public class PingCommand implements CommandExecutor {
+public class PingCommand extends Command {
 
-    @Command(aliases = {"!ping"}, description = "Pong!")
-    public String onCommand(String command, String[] args) {
-        return "Pong!";
+    public PingCommand() {
+        this.name = "ping";
+        this.aliases = new String[]{"test", "perf"};
+        this.help = "returns the ping";
+    }
+
+    @Override
+    protected void execute(CommandEvent event) {
+        event.reply("Ping: ...", m -> {
+            m.editMessage("Ping: "+event.getMessage().getCreationTime().until(m.getCreationTime(), ChronoUnit.MILLIS)+"ms | Websocket: "+event.getJDA().getPing()+"ms").queue();
+        });
     }
 
 }

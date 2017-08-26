@@ -9,5 +9,5 @@ If you want to talk with us about game developer things (in german!), join our D
 - Gradle
 - Guava
 - [JDA](https://github.com/DV8FromTheWorld/JDA/)
-- [sdcf4j](https://github.com/BtoBastian/sdcf4j)
+- [JDA-Utilities](https://github.com/JDA-Applications/JDA-Utilities)
 
