@@ -9,6 +9,7 @@ import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.germangamedevs.commands.IDCommand;
 import net.germangamedevs.commands.PingCommand;
+import net.germangamedevs.commands.RoleCommand;
 
 import javax.security.auth.login.LoginException;
 import java.awt.*;
@@ -50,7 +51,7 @@ public class Main {
         client.setOwnerId("98126233753120768");
 
         // sets emojis used throughout the bot on successes, warnings, and failures
-        client.setEmojis("\uD83D\uDE03", "\uD83D\uDE2E", "\uD83D\uDE26");
+        client.setEmojis("✅", "❗", "❌");
 
         // sets the bot prefix
         client.setPrefix("!!");
@@ -67,7 +68,8 @@ public class Main {
                 // command to check bot latency
                 new PingCommand(),
                 // command to check the user ID
-                new IDCommand()
+                new IDCommand(),
+                new RoleCommand()
         );
 
         // start getting a bot account set up
