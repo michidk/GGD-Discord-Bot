@@ -1,10 +1,27 @@
 group 'net.germangamedevs'
 version '1.0-SNAPSHOT'
 
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'net.germangamedevs.Main'
+        )
+    }
+}
 
 repositories {
     maven { url "http://repo.bastian-oppermann.de" }
