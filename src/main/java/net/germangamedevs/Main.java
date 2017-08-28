@@ -4,7 +4,9 @@ import com.google.common.io.Resources;
 import com.jagrosh.jdautilities.commandclient.CommandClientBuilder;
 import com.jagrosh.jdautilities.commandclient.examples.AboutCommand;
 import com.jagrosh.jdautilities.waiter.EventWaiter;
-import net.dv8tion.jda.core.*;
+import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.germangamedevs.commands.IDCommand;
@@ -23,7 +25,7 @@ public class Main {
 
     private static final String TOKEN_FILE_NAME = "token.txt";
 
-    public static void main(String [] args){
+    public static void main(String[] args) {
 
         String token = null;
 

@@ -19,7 +19,7 @@ public class PingCommand extends Command {
     @Override
     protected void execute(CommandEvent event) {
         event.reply("Ping: ...", m -> {
-            m.editMessage("Ping: "+event.getMessage().getCreationTime().until(m.getCreationTime(), ChronoUnit.MILLIS)+"ms | Websocket: "+event.getJDA().getPing()+"ms").queue();
+            m.editMessage("Ping: " + event.getMessage().getCreationTime().until(m.getCreationTime(), ChronoUnit.MILLIS) + "ms | Websocket: " + event.getJDA().getPing() + "ms").queue();
         });
     }
 
