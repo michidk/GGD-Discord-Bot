@@ -38,23 +38,23 @@ public class Main {
             return;
         }
 
-        // define an eventwaiter, dont forget to add this to the JDABuilder!
+        // define an eventwaiter
         EventWaiter waiter = new EventWaiter();
 
         // define a command client
         CommandClientBuilder client = new CommandClientBuilder();
 
-        // The default is "Type !!help" (or whatver prefix you set)
+        // The default is "Type !help"
         client.useDefaultGame();
 
         // sets the owner of the bot
         client.setOwnerId("98126233753120768");
 
         // sets emojis used throughout the bot on successes, warnings, and failures
-        client.setEmojis("✅", "❗", "❌");
+        client.setEmojis("\u2705", "\u2757", "\u274c");
 
         // sets the bot prefix
-        client.setPrefix("!!");
+        client.setPrefix("!");
 
         // adds commands
         client.addCommands(

@@ -4,11 +4,8 @@ import com.jagrosh.jdautilities.commandclient.Command;
 import com.jagrosh.jdautilities.commandclient.CommandEvent;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.managers.GuildController;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,8 +13,7 @@ import java.util.List;
  */
 public class RoleCommand extends Command {
 
-    public static final List<String> ROLES = new ArrayList<String>(Arrays.asList("Programmierer", "2D Artist", "3D Artist"));
-
+    public static final Color ROLE_COLOR = new Color(52, 152, 219);
 
     public RoleCommand() {
         this.name = "role";
@@ -32,9 +28,9 @@ public class RoleCommand extends Command {
         } else if (args.length == 1 || args[0].equalsIgnoreCase("list")) {
             replyList(event);
         } else if (args[0].equalsIgnoreCase("add")) {
-            addOrRemoveRole(event, args[1], true);
+            addOrRemoveRole(event, args, true);
         } else if (args[0].equalsIgnoreCase("remove")) {
-            addOrRemoveRole(event, args[1], false);
+            addOrRemoveRole(event, args, false);
         }
     }
 
@@ -44,8 +40,8 @@ public class RoleCommand extends Command {
         builder.setAuthor("Role Commands", null, null);
         builder.setDescription(
                 "- list: list of all roles\n" +
-                "- add: assigns you to a role\n" +
-                "- remove: removes a role from you"
+                        "- add: assigns you to a role\n" +
+                        "- remove: removes a role from you"
         );
         event.reply(builder.build());
     }
@@ -55,28 +51,44 @@ public class RoleCommand extends Command {
         builder.setColor(Color.orange);
         builder.setAuthor("Role List", null, null);
 
-        StringBuilder sb = new StringBuilder(ROLES.size());
-        for (String role : ROLES) {
-            sb.append("- " + role + "\n");
-        }
+        List<Role> roles = event.getGuild().getRoles();
+
+        StringBuilder sb = new StringBuilder(roles.size());
+        roles.stream()
+                .filter(r -> r.getColor() != null)
+                .filter(r -> r.getColor().equals(ROLE_COLOR))
+                .forEach(r -> sb.append("- " + r.getName() + "\n"));
 
         builder.setDescription(sb.toString());
         event.reply(builder.build());
     }
 
-    private void addOrRemoveRole(CommandEvent event, String roleName, boolean add) {
+    private void addOrRemoveRole(CommandEvent event, String[] args, boolean add) {
+        StringBuilder sb = new StringBuilder((args.length - 1) * 2);
+        for (int i = 1; i < args.length; i++) {
+            sb.append(args[i]);
+            if (i != args.length - 1)
+                sb.append(" ");
+        }
+        String roleName = sb.toString();
+
         List<Role> roles = event.getGuild().getRolesByName(roleName, true);
 
-        if (roles.size() == 0 || !ROLES.contains(roles.get(0).getName())) {
-            event.replyError("Role not found!");
+        if (roles.size() == 0) {
+            event.replyError("Role " + roleName + " not found!");
             return;
         }
+
         Role role = roles.get(0);
+        if (!role.getColor().equals(ROLE_COLOR)) {
+            event.replyError("Role " + roleName + "not allowed!");
+            return;
+        }
 
         if (add)
-            event.getGuild().getController().addRolesToMember(event.getMember(), roles.get(0)).reason("Roles Command").complete();
+            event.getGuild().getController().addRolesToMember(event.getMember(), role).reason("Roles Command").complete();
         else
-            event.getGuild().getController().removeRolesFromMember(event.getMember(), roles.get(0)).reason("Roles Command").complete();
+            event.getGuild().getController().removeRolesFromMember(event.getMember(), role).reason("Roles Command").complete();
 
         event.reactSuccess();
     }
