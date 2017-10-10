@@ -1,0 +1,9 @@
+{
+    "title": "GGD Bot",
+    "url": "https://github.com/michidk/GGD-Discord-Bot",
+    "description": "
+Dieser Bot wurde speziell für den German Game Developers-Discord entwickelt.
+Für die Entwicklung wurde Java 8 mit Gradle als Build-Tool benutzt.
+Falls du Ideen hast oder bei der Entwicklung mithelfen willst, schau dir das [Projekt auf GitHub](https://github.com/michidk/GGD-Discord-Bot) an.
+    "
+}

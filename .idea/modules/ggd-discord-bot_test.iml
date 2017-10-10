@@ -10,10 +10,13 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="ggd-discord-bot_main" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-simple:1.6.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.code.gson:gson:2.8.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:23.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.jagrosh:JDA-Utilities:1.5" level="project" />
-    <orderEntry type="library" name="Gradle: net.dv8tion:JDA:3.2.0_242" level="project" />
+    <orderEntry type="library" name="Gradle: com.jagrosh:JDA-Utilities:1.8" level="project" />
+    <orderEntry type="library" name="Gradle: net.dv8tion:JDA:3.3.0_260" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
+    <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.6.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.0.18" level="project" />
     <orderEntry type="library" name="Gradle: com.google.j2objc:j2objc-annotations:1.1" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />

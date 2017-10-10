@@ -2,16 +2,17 @@ package net.germangamedevs;
 
 import com.google.common.io.Resources;
 import com.jagrosh.jdautilities.commandclient.CommandClientBuilder;
-import com.jagrosh.jdautilities.commandclient.examples.AboutCommand;
 import com.jagrosh.jdautilities.waiter.EventWaiter;
 import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
+import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
-import net.germangamedevs.commands.IDCommand;
-import net.germangamedevs.commands.PingCommand;
-import net.germangamedevs.commands.RoleCommand;
+import net.germangamedevs.commands.*;
+import net.germangamedevs.features.AuthorizedServerCheckFeature;
+import net.germangamedevs.features.WelcomeFeature;
 
 import javax.security.auth.login.LoginException;
 import java.awt.*;
@@ -23,9 +24,20 @@ import java.nio.charset.StandardCharsets;
  */
 public class Main {
 
+    private static final long GGD_ID = 367310388737605632L;//287308543273730051L;
     private static final String TOKEN_FILE_NAME = "token.txt";
 
+    private static JDA jdaInstance = null;
+
+
     public static void main(String[] args) {
+        initializeJda();
+
+        new AuthorizedServerCheckFeature(jdaInstance);
+        new WelcomeFeature(jdaInstance);
+    }
+
+    private static void initializeJda() {
 
         String token = null;
 
@@ -47,7 +59,7 @@ public class Main {
         CommandClientBuilder client = new CommandClientBuilder();
 
         // The default is "Type !help"
-        client.useDefaultGame();
+        client.setGame(Game.of("Info: !help"));
 
         // sets the owner of the bot
         client.setOwnerId("98126233753120768");
@@ -60,23 +72,17 @@ public class Main {
 
         // adds commands
         client.addCommands(
-                // command to show information about the bot
-                new AboutCommand(
-                        Color.BLUE,
-                        "A bot for the German Game Developers Discord",
-                        new String[]{"Swag"}
-                ),
-
-                // command to check bot latency
+                new AboutCommand(),
                 new PingCommand(),
-                // command to check the user ID
                 new IDCommand(),
-                new RoleCommand()
+                new RoleCommand(),
+                new SupportCommand(),
+                new WelcomeCommand()
         );
 
         // start getting a bot account set up
         try {
-            new JDABuilder(AccountType.BOT)
+            jdaInstance = new JDABuilder(AccountType.BOT)
                     // set the token
                     .setToken(token)
 
@@ -95,6 +101,19 @@ public class Main {
         } catch (RateLimitedException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void leaveServerIfUnauthorized(Guild guild) {
+        long serverId = guild.getIdLong();
+
+        if (serverId != GGD_ID) {
+            System.out.println("Bot was added to unauthorized server " + serverId + "!");
+            guild.leave().queue();
+        }
+    }
+
+    public static JDA getJdaInstance() {
+        return jdaInstance;
     }
 
 }

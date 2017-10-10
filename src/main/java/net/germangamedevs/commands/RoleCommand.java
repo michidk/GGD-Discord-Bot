@@ -4,6 +4,8 @@ import com.jagrosh.jdautilities.commandclient.Command;
 import com.jagrosh.jdautilities.commandclient.CommandEvent;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Role;
+import net.germangamedevs.GGDCommand;
+import net.germangamedevs.GGDCommandEvent;
 
 import java.awt.*;
 import java.util.List;
@@ -11,17 +13,18 @@ import java.util.List;
 /**
  * Created by Michael Lohr on 26-Aug-17.
  */
-public class RoleCommand extends Command {
+public class RoleCommand extends GGDCommand {
 
     public static final Color ROLE_COLOR = new Color(52, 152, 219);
 
     public RoleCommand() {
+        super(false);
         this.name = "role";
         this.help = "Manages your roles";
     }
 
     @Override
-    protected void execute(CommandEvent event) {
+    protected void executeCommand(GGDCommandEvent event) {
         String[] args = event.getArgs().split(" ");
         if (args.length == 0 || args[0].equalsIgnoreCase("help")) {
             replyHelp(event);
