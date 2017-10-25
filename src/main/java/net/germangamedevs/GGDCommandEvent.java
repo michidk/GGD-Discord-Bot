@@ -23,6 +23,10 @@ public class GGDCommandEvent extends CommandEvent {
         super(event, args, client);
     }
 
+    public String[] getArgsArray() {
+        return this.getArgs().split(" ");
+    }
+
     public void replySuccessInDM(String message) {
         this.replyInDM(this.getClient().getSuccess() + " " + message);
     }
