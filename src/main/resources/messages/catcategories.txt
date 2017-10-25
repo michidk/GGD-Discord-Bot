@@ -1,0 +1,4 @@
+{
+    "title": "Verfügbare Kategorien",
+    "description": "hats, space, funny, sunglasses, boxes, caturday, ties, dream, kittens, sinks, clothes"
+}
