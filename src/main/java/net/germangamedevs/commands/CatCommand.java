@@ -18,7 +18,8 @@ public class CatCommand extends GGDCommand {
         super(true);
         this.name = "cat";
         this.aliases = new String[]{"catpic"};
-        this.help = "Postet ein Katzen Bild - `!cat categories` zum Auflisten aller Kategorien";
+        this.help = "Postet ein Katzen Bild";
+        this.arguments = "<category / list>";
 
         this.catCategories = new HashSet<>();
         for (CatCategory catCategory : CatCategory.values()) {
@@ -29,7 +30,7 @@ public class CatCommand extends GGDCommand {
     @Override
     protected void executeCommand(GGDCommandEvent event) {
         if(event.getArgsArray().length > 0) {
-            if(event.getArgsArray()[0].equalsIgnoreCase("categories")) {
+            if(event.getArgsArray()[0].equalsIgnoreCase("list")) {
                 try {
                     event.reply(MessageManager.getMessage("catcategories"));
                 } catch (FileNotFoundException e) {
