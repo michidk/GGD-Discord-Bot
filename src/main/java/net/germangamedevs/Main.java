@@ -1,6 +1,7 @@
 package net.germangamedevs;
 
 import com.google.common.io.Resources;
+import com.jagrosh.jdautilities.commandclient.CommandClient;
 import com.jagrosh.jdautilities.commandclient.CommandClientBuilder;
 import com.jagrosh.jdautilities.waiter.EventWaiter;
 import net.dv8tion.jda.core.AccountType;
@@ -28,6 +29,7 @@ public class Main {
     private static final String TOKEN_FILE_NAME = "token.txt";
 
     private static JDA jdaInstance = null;
+    private static CommandClient commandClientInstance = null;
 
 
     public static void main(String[] args) {
@@ -81,6 +83,8 @@ public class Main {
                 new WelcomeCommand()
         );
 
+        commandClientInstance = client.build();
+
         // start getting a bot account set up
         try {
             jdaInstance = new JDABuilder(AccountType.BOT)
@@ -93,7 +97,7 @@ public class Main {
 
                     // add the listeners
                     .addEventListener(waiter)
-                    .addEventListener(client.build())
+                    .addEventListener(commandClientInstance)
 
                     // start it up!
                     .buildAsync();
@@ -115,6 +119,10 @@ public class Main {
 
     public static JDA getJdaInstance() {
         return jdaInstance;
+    }
+
+    public static CommandClient getCommandClientInstance() {
+        return commandClientInstance;
     }
 
 }
