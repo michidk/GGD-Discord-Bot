@@ -73,6 +73,7 @@ public class Main {
         // adds commands
         client.addCommands(
                 new AboutCommand(),
+                new CatCommand(),
                 new PingCommand(),
                 new IDCommand(),
                 new RoleCommand(),
