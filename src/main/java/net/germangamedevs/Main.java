@@ -16,13 +16,9 @@ import net.germangamedevs.features.AuthorizedServerCheckFeature;
 import net.germangamedevs.features.WelcomeFeature;
 
 import javax.security.auth.login.LoginException;
-import java.awt.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Created by Michael Lohr on 26-Aug-17.
- */
 public class Main {
 
     private static final long GGD_ID = 367310388737605632L;//287308543273730051L;

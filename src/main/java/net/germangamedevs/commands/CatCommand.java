@@ -29,15 +29,15 @@ public class CatCommand extends GGDCommand {
 
     @Override
     protected void executeCommand(GGDCommandEvent event) {
-        if(event.getArgsArray().length > 0) {
-            if(event.getArgsArray()[0].equalsIgnoreCase("list")) {
+        if (event.getArgsArray().length > 0) {
+            if (event.getArgsArray()[0].equalsIgnoreCase("list")) {
                 try {
                     event.reply(MessageManager.getMessage("catcategories"));
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
                 return;
-            } else if(catCategories.contains(event.getArgsArray()[0].toLowerCase())) {
+            } else if (catCategories.contains(event.getArgsArray()[0].toLowerCase())) {
                 event.reply(getCat(CatCategory.valueOf(event.getArgsArray()[0].toUpperCase())));
                 return;
             }
@@ -47,7 +47,7 @@ public class CatCommand extends GGDCommand {
 
     public String getCat(CatCategory catCategory) {
         String TargetURL = API_URL;
-        if(catCategory != null)
+        if (catCategory != null)
             TargetURL += "&category=" + catCategory.toString();
 
         try {
