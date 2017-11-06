@@ -42,8 +42,8 @@ public class SupportCommand extends GGDCommand {
             builder.setColor(Color.green);
             builder.setTitle("Erfolgreich als Helfer registriert!");
             builder.setDescription(
-                    "Du hast dich als Helfer eingetragen und wirst nun Benachrichtigt wenn ein Mitglied Hilfe zu einem Themengebiet braucht, das du dir zugewießen hast.\n" +
-                            "Führe erneut dieses Kommando erneut aus, um nicht mehr Benachrichtigt zu werden."
+                    "Du hast dich als Helfer eingetragen und wirst nun Benachrichtigt wenn ein Mitglied Hilfe zu einem Themengebiet braucht, das du dir zugewie\u00DFen hast.\n" +
+                            "F\u00FChre erneut dieses Kommando erneut aus, um nicht mehr Benachrichtigt zu werden."
             );
 
             event.reply(builder.build());
@@ -55,7 +55,7 @@ public class SupportCommand extends GGDCommand {
             builder.setTitle("Du bist nun kein Helfer mehr.");
             builder.setDescription(
                     "Du wirst nun nicht mehr benachrichtigt falls ein Mitglied Hilfe braucht.\n" +
-                            "Führe dieses Kommando erneut aus um dich als Helfer zu registrieren."
+                            "F\u00FChre dieses Kommando erneut aus um dich als Helfer zu registrieren."
             );
 
             event.reply(builder.build());
