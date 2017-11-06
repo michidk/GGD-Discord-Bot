@@ -1,6 +1,5 @@
 package net.germangamedevs.commands;
 
-import com.jagrosh.jdautilities.commandclient.Command;
 import com.jagrosh.jdautilities.commandclient.CommandEvent;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Role;
@@ -10,9 +9,6 @@ import net.germangamedevs.GGDCommandEvent;
 import java.awt.*;
 import java.util.List;
 
-/**
- * Created by Michael Lohr on 26-Aug-17.
- */
 public class RoleCommand extends GGDCommand {
 
     public static final Color ROLE_COLOR = new Color(52, 152, 219);

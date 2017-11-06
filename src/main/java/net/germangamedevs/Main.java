@@ -1,6 +1,7 @@
 package net.germangamedevs;
 
 import com.google.common.io.Resources;
+import com.jagrosh.jdautilities.commandclient.CommandClient;
 import com.jagrosh.jdautilities.commandclient.CommandClientBuilder;
 import com.jagrosh.jdautilities.waiter.EventWaiter;
 import net.dv8tion.jda.core.AccountType;
@@ -15,19 +16,16 @@ import net.germangamedevs.features.AuthorizedServerCheckFeature;
 import net.germangamedevs.features.WelcomeFeature;
 
 import javax.security.auth.login.LoginException;
-import java.awt.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Created by Michael Lohr on 26-Aug-17.
- */
 public class Main {
 
     private static final long GGD_ID = 367310388737605632L;//287308543273730051L;
     private static final String TOKEN_FILE_NAME = "token.txt";
 
     private static JDA jdaInstance = null;
+    private static CommandClient commandClientInstance = null;
 
 
     public static void main(String[] args) {
@@ -81,6 +79,8 @@ public class Main {
                 new WelcomeCommand()
         );
 
+        commandClientInstance = client.build();
+
         // start getting a bot account set up
         try {
             jdaInstance = new JDABuilder(AccountType.BOT)
@@ -93,7 +93,7 @@ public class Main {
 
                     // add the listeners
                     .addEventListener(waiter)
-                    .addEventListener(client.build())
+                    .addEventListener(commandClientInstance)
 
                     // start it up!
                     .buildAsync();
@@ -115,6 +115,10 @@ public class Main {
 
     public static JDA getJdaInstance() {
         return jdaInstance;
+    }
+
+    public static CommandClient getCommandClientInstance() {
+        return commandClientInstance;
     }
 
 }
