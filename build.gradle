@@ -24,7 +24,6 @@ jar {
 }
 
 repositories {
-    maven { url "http://repo.bastian-oppermann.de" }
     jcenter()
     mavenCentral()
 }

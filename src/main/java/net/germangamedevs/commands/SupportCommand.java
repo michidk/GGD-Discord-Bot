@@ -10,6 +10,7 @@ import net.dv8tion.jda.core.managers.GuildController;
 import net.dv8tion.jda.core.requests.Route;
 import net.germangamedevs.GGDCommand;
 import net.germangamedevs.GGDCommandEvent;
+import net.germangamedevs.Main;
 import net.germangamedevs.managers.RoleManager;
 
 import java.awt.*;
@@ -32,8 +33,9 @@ public class SupportCommand extends GGDCommand {
 
     @Override
     protected void executeCommand(GGDCommandEvent event) {
-        Guild guild = event.getGuild();
-        Member member = event.getMember();
+
+        Guild guild = event.getJDA().getGuildById(Main.GGD_ID);
+        Member member = guild.getSelfMember();
 
         if (supportRole == null)
             supportRole = RoleManager.findRole(guild, RoleManager.SUPPORT_ROLE_NAME);
@@ -45,7 +47,7 @@ public class SupportCommand extends GGDCommand {
 
             EmbedBuilder builder = new EmbedBuilder();
             builder.setColor(Color.green);
-            builder.setTitle("Erfolgreich als Helfer regestriert!");
+            builder.setTitle("Erfolgreich als Helfer registriert!");
             builder.setDescription(
                     "Du hast dich als Helfer eingetragen und wirst nun Benachrichtigt falls ein Mitglied Hilfe zu einem Themengebiet braucht, das du dir zugewießen hast.\n" +
                     "Führe erneut dieses Kommando erneut aus, um nicht mehr Benachrichtigt zu werden."

@@ -12,10 +12,8 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.germangamedevs.commands.*;
 import net.germangamedevs.features.AuthorizedServerCheckFeature;
-import net.germangamedevs.features.WelcomeFeature;
 
 import javax.security.auth.login.LoginException;
-import java.awt.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -24,7 +22,7 @@ import java.nio.charset.StandardCharsets;
  */
 public class Main {
 
-    private static final long GGD_ID = 367310388737605632L;//287308543273730051L;
+    public static final long GGD_ID = 287308543273730051L;//GGD-Discord: 287308543273730051L; Test-Discord: 367310388737605632L
     private static final String TOKEN_FILE_NAME = "token.txt";
 
     private static JDA jdaInstance = null;
@@ -34,7 +32,6 @@ public class Main {
         initializeJda();
 
         new AuthorizedServerCheckFeature(jdaInstance);
-        new WelcomeFeature(jdaInstance);
     }
 
     private static void initializeJda() {
@@ -76,9 +73,7 @@ public class Main {
                 new CatCommand(),
                 new PingCommand(),
                 new IDCommand(),
-                new RoleCommand(),
-                new SupportCommand(),
-                new WelcomeCommand()
+                new SupportCommand()
         );
 
         // start getting a bot account set up
@@ -102,6 +97,7 @@ public class Main {
         } catch (RateLimitedException e) {
             e.printStackTrace();
         }
+
     }
 
     public static void leaveServerIfUnauthorized(Guild guild) {
