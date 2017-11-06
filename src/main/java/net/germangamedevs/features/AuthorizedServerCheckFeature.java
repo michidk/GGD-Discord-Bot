@@ -7,9 +7,6 @@ import net.dv8tion.jda.core.events.guild.GuildJoinEvent;
 import net.germangamedevs.Feature;
 import net.germangamedevs.Main;
 
-/**
- * Created by Michael Lohr on 10.10.2017.
- */
 public class AuthorizedServerCheckFeature extends Feature {
 
     public AuthorizedServerCheckFeature(JDA jda) {

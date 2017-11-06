@@ -4,12 +4,6 @@ import com.jagrosh.jdautilities.commandclient.Command;
 import com.jagrosh.jdautilities.commandclient.CommandEvent;
 import net.dv8tion.jda.core.entities.ChannelType;
 
-import java.time.temporal.ChronoUnit;
-
-
-/**
- * Created by Michael Lohr on 10.10.2017.
- */
 public abstract class GGDCommand extends Command {
 
     private boolean allowedInGuild;
