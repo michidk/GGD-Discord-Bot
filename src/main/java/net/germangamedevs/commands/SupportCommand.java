@@ -28,7 +28,7 @@ public class SupportCommand extends GGDCommand {
     protected void executeCommand(GGDCommandEvent event) {
 
         Guild guild = event.getJDA().getGuildById(Main.GGD_ID);
-        Member member = guild.getSelfMember();
+        Member member = guild.getMember(event.getAuthor());
 
         if (supportRole == null)
             supportRole = RoleManager.findRole(guild, RoleManager.SUPPORT_ROLE_NAME);
