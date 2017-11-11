@@ -6,7 +6,7 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Role;
 import net.germangamedevs.GGDCommand;
 import net.germangamedevs.GGDCommandEvent;
-import net.germangamedevs.Main;
+import net.germangamedevs.managers.ConfigManager;
 import net.germangamedevs.managers.RoleManager;
 
 import java.awt.*;
@@ -27,7 +27,7 @@ public class SupportCommand extends GGDCommand {
     @Override
     protected void executeCommand(GGDCommandEvent event) {
 
-        Guild guild = event.getJDA().getGuildById(Main.GGD_ID);
+        Guild guild = event.getJDA().getGuildById(ConfigManager.getConfig().getServer());
         Member member = guild.getMember(event.getAuthor());
 
         if (supportRole == null)
