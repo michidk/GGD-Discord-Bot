@@ -12,6 +12,7 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.germangamedevs.commands.*;
 import net.germangamedevs.features.AuthorizedServerCheckFeature;
+import net.germangamedevs.features.LogFeature;
 import net.germangamedevs.managers.ConfigManager;
 
 import javax.security.auth.login.LoginException;
@@ -27,6 +28,7 @@ public class Main {
         initializeJda();
 
         new AuthorizedServerCheckFeature(jdaInstance);
+        new LogFeature(jdaInstance);
     }
 
     private static void initializeJda() {

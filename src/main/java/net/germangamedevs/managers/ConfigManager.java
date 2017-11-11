@@ -46,6 +46,9 @@ public class ConfigManager {
     public static class Config {
         private String token;
         private long server;
+        private long log;
+        @SerializedName("date_format")
+        private String dateFormat;
 
         public String getToken() {
             return token;
@@ -53,6 +56,14 @@ public class ConfigManager {
 
         public long getServer() {
             return server;
+        }
+
+        public long getLog() {
+            return log;
+        }
+
+        public String getDateFormat() {
+            return dateFormat;
         }
     }
 }
