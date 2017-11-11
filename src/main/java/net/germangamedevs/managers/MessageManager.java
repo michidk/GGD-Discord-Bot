@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 public class MessageManager {
 
     private static final String FOLDER = "messages/";
-    private static final String SUFFIX = ".txt";
+    private static final String SUFFIX = ".json";
 
 
     private static Gson gson = new GsonBuilder().registerTypeAdapter(Color.class, new AwtColorTypeAdapter()).create();

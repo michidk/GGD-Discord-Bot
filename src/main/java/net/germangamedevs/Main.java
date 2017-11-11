@@ -1,6 +1,5 @@
 package net.germangamedevs;
 
-import com.google.common.io.Resources;
 import com.jagrosh.jdautilities.commandclient.CommandClient;
 import com.jagrosh.jdautilities.commandclient.CommandClientBuilder;
 import com.jagrosh.jdautilities.waiter.EventWaiter;
@@ -13,15 +12,12 @@ import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.exceptions.RateLimitedException;
 import net.germangamedevs.commands.*;
 import net.germangamedevs.features.AuthorizedServerCheckFeature;
+import net.germangamedevs.managers.ConfigManager;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 public class Main {
-
-    public static final long GGD_ID = 287308543273730051L;//GGD-Discord: 287308543273730051L; Test-Discord: 367310388737605632L
-    private static final String TOKEN_FILE_NAME = "token.txt";
 
     private static JDA jdaInstance = null;
     private static CommandClient commandClientInstance = null;
@@ -34,17 +30,10 @@ public class Main {
     }
 
     private static void initializeJda() {
-
-        String token = null;
-
         try {
-            token = Resources.toString(Resources.getResource(TOKEN_FILE_NAME), StandardCharsets.UTF_8); //TODO: create a config-file? (json/xml/properties?)
+            ConfigManager.loadConfig();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        if (token == null) {
-            System.err.println("Can't read token.txt. Exit");
             return;
         }
 
@@ -81,7 +70,7 @@ public class Main {
         try {
             jdaInstance = new JDABuilder(AccountType.BOT)
                     // set the token
-                    .setToken(token)
+                    .setToken(ConfigManager.getConfig().getToken())
 
                     // set the game for when the bot is loading
                     .setStatus(OnlineStatus.DO_NOT_DISTURB)
@@ -93,9 +82,7 @@ public class Main {
 
                     // start it up!
                     .buildAsync();
-        } catch (LoginException e) {
-            e.printStackTrace();
-        } catch (RateLimitedException e) {
+        } catch (LoginException | RateLimitedException e) {
             e.printStackTrace();
         }
 
@@ -104,7 +91,7 @@ public class Main {
     public static void leaveServerIfUnauthorized(Guild guild) {
         long serverId = guild.getIdLong();
 
-        if (serverId != GGD_ID) {
+        if (serverId != ConfigManager.getConfig().getServer()) {
             System.out.println("Bot was added to unauthorized server " + serverId + "!");
             guild.leave().queue();
         }
